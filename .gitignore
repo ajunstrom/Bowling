@@ -1,7 +1,11 @@
 node_modules/
-client/node_modules/
-server/node_modules/
-client/dist/
-*.env
+.next/
+out/
+.env
+.env.local
 .DS_Store
 uploads/
+*.db
+client/node_modules/
+client/dist/
+server/node_modules/
