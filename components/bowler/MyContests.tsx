@@ -59,13 +59,22 @@ function ExpandCard({
 function BracketsSection({ data }: { data: any }) {
   const bowlerId = data.bowler?.id
   const allScores: any[] = data.allScores ?? []
+  const settings = data.session?.settings ?? {}
+
+  if (!settings.brackets_enabled) return null
 
   // Find brackets where this bowler occupies a slot
   const myBrackets = (data.brackets ?? []).filter((b: any) =>
     (b.slots ?? []).some((s: any) => s.bowler_id === bowlerId)
   )
 
-  if (!myBrackets.length) return null
+  if (!myBrackets.length) {
+    return (
+      <ExpandCard title="Brackets" accent="border-blue-700" defaultOpen>
+        <p className="text-xs text-slate-400">Brackets not yet generated.</p>
+      </ExpandCard>
+    )
+  }
 
   return (
     <ExpandCard title="Brackets" accent="border-blue-700" defaultOpen>
